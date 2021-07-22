@@ -1,0 +1,43 @@
+﻿@model IPagedList<Employee_Details.Models.EmployeeModel>
+@{
+    ViewBag.Title = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc ;
+@using PagedList;
+<h2>Employee Details</h2>
+
+<form action="EmpViewIndex" method="get">
+
+    <table style="table-layout: auto; text-align :center " class=" table table-bordered table-responsive table-striped">
+        <thead>
+            <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Gender</td>
+                <td>Date of Birth</td>
+                <td>Address</td>
+                <td>Photo</td>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Gender</td>
+                <td>@item.DOB.ToShortDateString()</td>
+                <td>@item.Address</td>
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.Photo);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                </td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, i => Url.Action("EmpViewIndex", "EmployeeView", new { i }))
+</form>

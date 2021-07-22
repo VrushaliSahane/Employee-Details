@@ -1,0 +1,25 @@
+CREATE TABLE Employee
+( 
+  emp_Id int Not null,
+  emp_Firstname char(20) NOT NULL,
+  emp_Lastname char(20) NOT NULL,
+  emp_Gender varchar(9) NOT NULL,
+  emp_DOB date Not null,
+  emp_Address nvarchar(max) not null,
+  emp_Photo varbinary(max) not null,
+  CONSTRAINT employees_pk PRIMARY KEY (emp_Id)
+);
+	
+
+CREATE TABLE Salary
+(
+ sal_id int not null,
+ sal_Fromdate date Not Null,
+ sal_ToDate date Not Null,
+ sal_Basic Decimal Not Null,
+ sal_HRA Decimal,
+ sal_Travel Decimal,
+ emp_Id int Not null,
+ CONSTRAINT salary_pk PRIMARY KEY (sal_id)
+
+);
